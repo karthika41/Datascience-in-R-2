@@ -1,0 +1,27 @@
+# Importing Libraries
+library(ggplot2)
+library(dplyr)
+
+# Importing Dataset
+iris <- read.csv("iris_tidy.csv")
+
+# Viewing Dataset
+View(iris)
+
+  ggplot(iris, mapping = aes())+
+  geom_bar(mapping = aes(x=Species,fill=Species))
+  
+  ggplot(data = iris) +
+  aes(x = Species, y = Sepal.Length, color = Species) +
+  geom_boxplot()
+  
+  ggplot(data = iris) +
+  aes(x = Petal.Length, fill = Species) +
+  geom_density(alpha = 0.3) +
+  facet_wrap(~Species, nrow = 3)
+  
+  ma <- as.matrix(iris[, 1:4]) # convert to matrix
+  colMeans(ma) # column means for matrix
+  colSums(ma)
+  pairs(ma)
+  pairs(ma, col = rainbow(3)[speciesID]) # set colors by species
