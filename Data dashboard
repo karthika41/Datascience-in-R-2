@@ -1,0 +1,52 @@
+---
+title: "Iris Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+iris <- read.csv("iris_tidy.csv", stringsAsFactors = FALSE)
+
+Column {data-width=600}
+-------------------------------------
+
+### Chart 1
+
+```{r}
+ggplot(iris, mapping = aes())+
+  geom_bar(mapping = aes(x=Species,fill=Species))
+```
+### Chart 2
+
+```{r}
+ggplot(data = iris) +
+  aes(x = Species, y = Sepal.Length, color = Species) +
+  geom_boxplot()
+```
+
+
+Column {data-width=400}
+-------------------------------------
+
+### Chart 3
+
+```{r}
+ggplot(data = iris) +
+  aes(x = Petal.Length, fill = Species) +
+  geom_density(alpha = 0.3) +
+  facet_wrap(~Species, nrow = 3)
+```
+
+### Chart 4
+
+```{r}
+ma <- as.matrix(iris[, 1:4]) # convert to matrix
+colMeans(ma) # column means for matrix
+colSums(ma)
+pairs(ma)
+pairs(ma, col = rainbow(3)[speciesID]) # set colors by species
+```
